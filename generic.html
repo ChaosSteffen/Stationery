@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	{block:IndexPage}
-	<title>{Title}</title>
+	<title>{Title}{block:IfTagline} - {text:Tagline}{/block:IfTagline}</title>
 	<meta name="description" content="{MetaDescription}" />
 	{/block:IndexPage}
 	{block:PostSummary}<title>{PostSummary}</title>{/block:PostSummary}
