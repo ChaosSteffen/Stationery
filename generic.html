@@ -60,7 +60,7 @@
 			  timeout: 5000,
 			  success: function(data){              
 				  $.each(data, function(i,tweet){
-				    var html = '<li>' + tweet.text + ' <span><a href="http://www.twitter.com/{TwitterUsername}/status/' + tweet.id + '">{lang:Permalink}<\/a><\/span><\/li>';
+				    var html = '<li>' + tweet.text + ' <span><a href="http://www.twitter.com/{TwitterUsername}/status/' + tweet.id + '">Permalink<\/a><\/span><\/li>';
 				    $('#stat-tweet').append(html);
 				  });
 				  $('#stat-tweets').css('display','block');
@@ -74,7 +74,7 @@
 	{/block:IndexPage}
 	<style type="text/css" media="screen">
 		body { background-color: {color:Background}; }
-		{block:Japanese}#stat-navigation .stat-nav-center {font-size: 16px !important;}{/block:Japanese}
+		.tag, .search_query { font-weight: bold; }
 		{CustomCSS}
 	</style>
 </head>
@@ -133,7 +133,7 @@
 			<h2>{text:Tools Description}</h2>
 			<ul>
 				<li><a rel="archives" href="/archive">{lang:Archive}</a></li>
-				<li><a rel="alternate" type="application/rss+xml" href="{RSS}">{lang:Subscribe}</a></li>
+				<li><a rel="alternate" type="application/rss+xml" href="{RSS}">{lang:RSS}</a></li>
 			</ul>
 		</nav>
 		{/block:IfShowBlogTools}
@@ -141,7 +141,7 @@
 	{block:IndexPage}
 	{block:IfShowLatestTweet}
 	<section id="stat-tweets" class="stat-boxed">
-		<h2>{lang:Latest Tweets}</h2>
+		<h2>{lang:Latest Tweet}</h2>
 		<ul id="stat-tweet"></ul>
 	</section>
 	{/block:IfShowLatestTweet}
@@ -168,7 +168,12 @@
 	{block:SearchPage}
 	<article class="stat-text">
 		<section>
-			<p>{block:NoSearchResults}Sorry! {/block:NoSearchResults}We found {SearchResultCount} results for <strong>{SearchQuery}</strong></p>
+		    {block:NoSearchResults}
+		        <p>{lang:No search results for SearchQuery 2}</p>
+		    {/block:NoSearchResults}
+		    {block:SearchResults}
+		        <p>{lang:Found SearchResultCount results for SearchQuery 2}</p>
+		    {/block:SearchResults}
 		</section>
 		<div class="stat-clear"></div>
 	</article>
@@ -178,14 +183,14 @@
 	<article class="stat-text" id="post-{PostID}">
 		<header>
 			{block:Date}
-				<p class="stat-notes"><a class="stat-bubble" href="{Permalink}#notes"><span class="stat-point"></span><em>{NoteCount}</em> {lang:Notes}</a>{block:IfDisqusShortname} &amp; <a class="stat-disqus" href="{Permalink}#disqus_thread">Comments</a>{/block:IfDisqusShortname}</p>
+				<p class="stat-notes"><a class="stat-bubble" href="{Permalink}#notes"><span class="stat-point"></span><em>{NoteCountWithLabel}</em></a>{block:IfDisqusShortname} &amp; <a class="stat-disqus" href="{Permalink}#disqus_thread">{lang:Comments}</a>{/block:IfDisqusShortname}</p>
 				<time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}" pubdate><a rel="bookmark" href="{Permalink}">{Month} {DayOfMonth}, {Year}</a></time>
 			{/block:Date}
 			{block:Title}<h1><a rel="bookmark" href="{Permalink}">{Title}</a></h1>{/block:Title}
 		</header>
 		<section>
 			{Body}
-			{block:More}<p class="stat-more"><a href="{Permalink}">Read more &hellip;</a></p>{/block:More}
+			{block:More}<p class="stat-more"><a href="{Permalink}">{lang:Read more} &hellip;</a></p>{/block:More}
 		</section>
 		<div class="stat-clear"></div>
 		{block:IfShowGroupPostAuthor}{block:GroupMembers}
@@ -205,7 +210,7 @@
 	<article class="stat-photo" id="post-{PostID}">
 		<header>
 			{block:Date}
-				<p class="stat-notes"><a class="stat-bubble" href="{Permalink}#notes"><span class="stat-point"></span><em>{NoteCount}</em> {lang:Notes}</a>{block:IfDisqusShortname} &amp; <a class="stat-disqus" href="{Permalink}#disqus_thread">Comments</a>{/block:IfDisqusShortname}</p>
+				<p class="stat-notes"><a class="stat-bubble" href="{Permalink}#notes"><span class="stat-point"></span><em>{NoteCountWithLabel}</em></a>{block:IfDisqusShortname} &amp; <a class="stat-disqus" href="{Permalink}#disqus_thread">{lang:Comments}</a>{/block:IfDisqusShortname}</p>
 				<time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}" pubdate><a rel="bookmark" href="{Permalink}">{Month} {DayOfMonth}, {Year}</a></time>
 			{/block:Date}
 			<div class="stat-media-wrapper">{LinkOpenTag}<img src="{PhotoURL-500}" alt="{PhotoAlt}" />{LinkCloseTag}</div>
@@ -229,7 +234,7 @@
 	<article class="stat-photoset" id="post-{PostID}">
 		<header>
 			{block:Date}
-				<p class="stat-notes"><a class="stat-bubble" href="{Permalink}#notes"><span class="stat-point"></span><em>{NoteCount}</em> {lang:Notes}</a>{block:IfDisqusShortname} &amp; <a class="stat-disqus" href="{Permalink}#disqus_thread">Comments</a>{/block:IfDisqusShortname}</p>
+				<p class="stat-notes"><a class="stat-bubble" href="{Permalink}#notes"><span class="stat-point"></span><em>{NoteCountWithLabel}</em></a>{block:IfDisqusShortname} &amp; <a class="stat-disqus" href="{Permalink}#disqus_thread">{lang:Comments}</a>{/block:IfDisqusShortname}</p>
 				<time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}" pubdate><a rel="bookmark" href="{Permalink}">{Month} {DayOfMonth}, {Year}</a></time>
 			{/block:Date}
 			<div class="stat-media-wrapper">{Photoset-500}</div>
@@ -253,7 +258,7 @@
 	<article class="stat-quote" id="post-{PostID}">
 		<header>
 			{block:Date}
-				<p class="stat-notes"><a class="stat-bubble" href="{Permalink}#notes"><span class="stat-point"></span><em>{NoteCount}</em> {lang:Notes}</a>{block:IfDisqusShortname} &amp; <a class="stat-disqus" href="{Permalink}#disqus_thread">Comments</a>{/block:IfDisqusShortname}</p>
+				<p class="stat-notes"><a class="stat-bubble" href="{Permalink}#notes"><span class="stat-point"></span><em>{NoteCountWithLabel}</em></a>{block:IfDisqusShortname} &amp; <a class="stat-disqus" href="{Permalink}#disqus_thread">{lang:Comments}</a>{/block:IfDisqusShortname}</p>
 				<time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}" pubdate><a rel="bookmark" href="{Permalink}">{Month} {DayOfMonth}, {Year}</a></time>
 			{/block:Date}
 			<blockquote>{Quote}</blockquote>
@@ -277,7 +282,7 @@
 	<article class="stat-link" id="post-{PostID}">
 		<header>
 			{block:Date}
-				<p class="stat-notes"><a class="stat-bubble" href="{Permalink}#notes"><span class="stat-point"></span><em>{NoteCount}</em> {lang:Notes}</a>{block:IfDisqusShortname} &amp; <a class="stat-disqus" href="{Permalink}#disqus_thread">Comments</a>{/block:IfDisqusShortname}</p>
+				<p class="stat-notes"><a class="stat-bubble" href="{Permalink}#notes"><span class="stat-point"></span><em>{NoteCountWithLabel}</em></a>{block:IfDisqusShortname} &amp; <a class="stat-disqus" href="{Permalink}#disqus_thread">{lang:Comments}</a>{/block:IfDisqusShortname}</p>
 				<time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}" pubdate><a rel="bookmark" href="{Permalink}">{Month} {DayOfMonth}, {Year}</a></time>
 			{/block:Date}
 			<h1><a rel="external" href="{URL}" {Target}>{Name}</a></h1>
@@ -301,7 +306,7 @@
 	<article class="stat-chat" id="post-{PostID}">
 		<header>
 			{block:Date}
-				<p class="stat-notes"><a class="stat-bubble" href="{Permalink}#notes"><span class="stat-point"></span><em>{NoteCount}</em> {lang:Notes}</a>{block:IfDisqusShortname} &amp; <a class="stat-disqus" href="{Permalink}#disqus_thread">Comments</a>{/block:IfDisqusShortname}</p>
+				<p class="stat-notes"><a class="stat-bubble" href="{Permalink}#notes"><span class="stat-point"></span><em>{NoteCountWithLabel}</em></a>{block:IfDisqusShortname} &amp; <a class="stat-disqus" href="{Permalink}#disqus_thread">{lang:Comments}</a>{/block:IfDisqusShortname}</p>
 				<time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}" pubdate><a rel="bookmark" href="{Permalink}">{Month} {DayOfMonth}, {Year}</a></time>
 			{/block:Date}
 			{block:Title}<h1><a rel="bookmark" href="{Permalink}">{Title}</a></h1>{/block:Title}
@@ -329,14 +334,14 @@
 	<article class="stat-audio" id="post-{PostID}">
 		<header>
 			{block:Date}
-				<p class="stat-notes"><a class="stat-bubble" href="{Permalink}#notes"><span class="stat-point"></span><em>{NoteCount}</em> {lang:Notes}</a>{block:IfDisqusShortname} &amp; <a class="stat-disqus" href="{Permalink}#disqus_thread">Comments</a>{/block:IfDisqusShortname}</p>
+				<p class="stat-notes"><a class="stat-bubble" href="{Permalink}#notes"><span class="stat-point"></span><em>{NoteCountWithLabel}</em></a>{block:IfDisqusShortname} &amp; <a class="stat-disqus" href="{Permalink}#disqus_thread">{lang:Comments}</a>{/block:IfDisqusShortname}</p>
 				<time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}" pubdate><a rel="bookmark" href="{Permalink}">{Month} {DayOfMonth}, {Year}</a></time>
 			{/block:Date}
 			<div class="stat-audio-wrapper {block:AlbumArt}stat-extra-padding{/block:AlbumArt}">
 				{block:AlbumArt}<div class="stat-audio-album-art"><img src="{AlbumArtURL}" alt /></div>{/block:AlbumArt}
 				<div class="stat-audio-left">
 					<div class="stat-audio-player">{AudioPlayerBlack}</div>
-					<div class="stat-audio-play-count">{PlayCountWithLabel}{block:ExternalAudio} <a href="{ExternalAudioURL}" class="stat-audio-download">&rarr;</a>{/block:ExternalAudio}</div>
+					<div class="stat-audio-play-count">{FormattedPlayCount} Plays{block:ExternalAudio} <a href="{ExternalAudioURL}" class="stat-audio-download">&rarr;</a>{/block:ExternalAudio}</div>
 					{block:Artist}<div class="stat-audio-artist">{Artist}</div>{/block:Artist}
 					{block:TrackName}<div class="stat-audio-song">{TrackName}</div>{/block:TrackName}
 				</div>
@@ -362,7 +367,7 @@
 	<article class="stat-video" id="post-{PostID}">
 		<header>
 			{block:Date}
-				<p class="stat-notes"><a class="stat-bubble" href="{Permalink}#notes"><span class="stat-point"></span><em>{NoteCount}</em> {lang:Notes}</a>{block:IfDisqusShortname} &amp; <a class="stat-disqus" href="{Permalink}#disqus_thread">Comments</a>{/block:IfDisqusShortname}</p>
+				<p class="stat-notes"><a class="stat-bubble" href="{Permalink}#notes"><span class="stat-point"></span><em>{NoteCountWithLabel}</em></a>{block:IfDisqusShortname} &amp; <a class="stat-disqus" href="{Permalink}#disqus_thread">{lang:Comments}</a>{/block:IfDisqusShortname}</p>
 				<time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}" pubdate><a rel="bookmark" href="{Permalink}">{Month} {DayOfMonth}, {Year}</a></time>
 			{/block:Date}
 			<div class="stat-media-wrapper">{Video-500}</div>
@@ -386,7 +391,7 @@
 	<article class="stat-answer" id="post-{PostID}">
 		<header>
 			{block:Date}
-				<p class="stat-notes"><a class="stat-bubble" href="{Permalink}#notes"><span class="stat-point"></span><em>{NoteCount}</em> {lang:Notes}</a>{block:IfDisqusShortname} &amp; <a class="stat-disqus" href="{Permalink}#disqus_thread">Comments</a>{/block:IfDisqusShortname}</p>
+				<p class="stat-notes"><a class="stat-bubble" href="{Permalink}#notes"><span class="stat-point"></span><em>{NoteCountWithLabel}</em></a>{block:IfDisqusShortname} &amp; <a class="stat-disqus" href="{Permalink}#disqus_thread">{lang:Comments}</a>{/block:IfDisqusShortname}</p>
 				<time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}" pubdate><a rel="bookmark" href="{Permalink}">{Month} {DayOfMonth}, {Year}</a></time>
 			{/block:Date}
 		</header>
@@ -441,7 +446,7 @@
 </div><!-- END#stat-wrapper -->
 
 <footer id="stat-footer">
-	<p>{lang:Powered by Tumblr 2} <span>&amp;</span> <a href="http://www.tumblr.com/theme/3292" rel="external">Stationery</a> by <a href="http://thijsjacobs.com/" rel="external">Thijs</a></p>
+	<p>We love <a href="http://www.tumblr.com/" rel="external">Tumblr</a> <span>&amp;</span> <a href="http://www.tumblr.com/theme/3292" rel="external">Stationery</a> by <a href="http://thijsjacobs.com/" rel="external">Thijs</a></p>
 </footer>
 
 {block:Posts}{block:Permalink}{block:Date}
