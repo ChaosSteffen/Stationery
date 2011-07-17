@@ -44,6 +44,18 @@
 		//]]>
 	</script>
 	{/block:IfGoogleAnalyticsID}
+	<script type="text/javascript" src="https://apis.google.com/js/plusone.js">{lang: 'de'}</script>
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		(function() {
+			var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+					s.type = 'text/javascript';
+					s.async = true;
+					s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+					t.parentNode.insertBefore(s, t);
+		})();
+		/* ]]> */
+	</script>
 	{block:IfTypekitKitID}
 	<script type="text/javascript" src="http://use.typekit.com/{text:Typekit Kit ID}.js"></script> 
 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -183,7 +195,20 @@
 	<article class="stat-text" id="post-{PostID}">
 		<header>
 			{block:Date}
-				<p class="stat-notes"><a class="stat-bubble" href="{Permalink}#notes"><span class="stat-point"></span><em>{NoteCountWithLabel}</em></a>{block:IfDisqusShortname} &amp; <a class="stat-disqus" href="{Permalink}#disqus_thread">{lang:Comments}</a>{/block:IfDisqusShortname}</p>
+				<p class="stat-notes">
+					<span class="flattr">
+						<a class="FlattrButton" style="display:none;"
+							title="Big Boy, Small World: {Title}"
+							lang="de_DE"
+							rev="flattr;uid:ChaosSteffen;category:text;button:compact;"
+							href="{Permalink}">Big Boy, Small World: {Title} ( {Permalink} )</a>
+					</span>
+					<a class="stat-bubble" href="{Permalink}#notes">
+						<span class="stat-point"></span>
+						<em>{NoteCountWithLabel}</em>
+					</a>
+					{block:IfDisqusShortname} &amp; <a class="stat-disqus" href="{Permalink}#disqus_thread">{lang:Comments}</a>{/block:IfDisqusShortname}
+				</p>
 				<time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}" pubdate><a rel="bookmark" href="{Permalink}">{Month} {DayOfMonth}, {Year}</a></time>
 			{/block:Date}
 			{block:Title}<h1><a rel="bookmark" href="{Permalink}">{Title}</a></h1>{/block:Title}
