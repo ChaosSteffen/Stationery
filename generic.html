@@ -2,11 +2,23 @@
 <html>
 <head>
 	<meta charset="utf-8" />
+	<meta property="fb:admins" content="507754773">
+	<meta property="og:site_name" content="Big Boy, Small World">
+
 	{block:IndexPage}
-	<title>{Title}{block:IfTagline} - {text:Tagline}{/block:IfTagline}</title>
-	<meta name="description" content="{MetaDescription}" />
+		<title>{Title}{block:IfTagline} - {text:Tagline}{/block:IfTagline}</title>
+		<meta name="description" content="{MetaDescription}" />
+		<meta property="og:image" content="http://f.cl.ly/items/370w351f2A1B1v0P3y2k/download.jpeg"/>
+		<meta property="og:type" content="blog">
+		<meta property="og:title" content="Big Boy, Small World">
+		<meta property="og:url" content="http://bigboysmallworld.com/">
 	{/block:IndexPage}
-	{block:PostSummary}<title>{PostSummary}</title>{/block:PostSummary}
+	{block:PostSummary}
+		<title>{PostSummary}</title>
+		<meta property="og:type" content="article">
+		<meta property="og:title" content="{PostSummary}">
+		<meta property="og:url" content="{Permalink}">
+	{/block:PostSummary}
 	<meta name="color:Background" content="#E2E1DE" />
 	<meta name="image:Header" content="" />
 	<meta name="if:Show About" content="1" />
@@ -15,26 +27,25 @@
 	<meta name="if:Show Latest Tweet" content="0" />
 	<meta name="if:Show Likes" content="0" />
 	<meta name="if:Show Search" content="1" />
-	<meta name="text:Tagline" content="Your awesome Tagline" />
+	<meta name="text:Tagline" content="{text:Tagline}" />
 	<meta name="text:About Description" content="About the author" />
 	<meta name="text:Pages Description" content="My Pages" />
 	<meta name="text:Tools Description" content="Blog Tools" />
 	<meta name="text:Google Analytics ID" content="" />
-	<meta name="text:Typekit Kit ID" content="" />
 	<meta name="text:Disqus Shortname" content="" />
-	<meta name="text:Facebook Page ID" content="" />
-	<link rel="shortcut icon" href="{Favicon}" /> 
+	<meta name="text:Facebook Page ID" content="148933421841740" />
+	<link rel="shortcut icon" href="{Favicon}" />
 	<link rel="alternate" type="application/rss+xml" href="{RSS}" />
 	<link rel="stylesheet" type="text/css" href="http://static.tumblr.com/j8lh0bq/BGcl3oapq/stat-reset.css" />
 	<link rel="stylesheet" type="text/css" href="http://static.tumblr.com/j8lh0bq/2sel3s13n/stat-super.css" />
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-	<script type="text/javascript">
-		/* <![CDATA[ */
-		jQuery(document).ready(function() {
-			jQuery('img').parent('a').css('border', 'none');
-		});
-		/* ]]> */
-	</script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+  <script type="text/javascript">
+  /* <![CDATA[ */
+  jQuery(document).ready(function() {
+    jQuery('img').parent('a').css('border', 'none');
+  });
+  /* ]]> */
+  </script>
 	<script type="text/javascript" src="http://static.tumblr.com/j8lh0bq/Emdl3qcku/stat-modernizr-1.1.min.js"></script>
 	<script type="text/javascript" src="http://static.tumblr.com/j8lh0bq/oYal3slyu/stat-hacks.js"></script>
 	{block:IfGoogleAnalyticsID}
@@ -53,18 +64,18 @@
 	{/block:IfGoogleAnalyticsID}
 	<script type="text/javascript" src="https://apis.google.com/js/plusone.js">{lang: 'de'}</script>
 	<script type="text/javascript">
-		/* <![CDATA[ */
-		(function() {
-			var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
-					s.type = 'text/javascript';
-					s.async = true;
-					s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
-					t.parentNode.insertBefore(s, t);
-		})();
-		/* ]]> */
-	</script>
+  /* <![CDATA[ */
+      (function() {
+          var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+          s.type = 'text/javascript';
+          s.async = true;
+          s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+          t.parentNode.insertBefore(s, t);
+      })();
+  /* ]]> */
+  </script>
 	{block:IfTypekitKitID}
-	<script type="text/javascript" src="http://use.typekit.com/{text:Typekit Kit ID}.js"></script> 
+	<script type="text/javascript" src="http://use.typekit.com/{text:Typekit Kit ID}.js"></script>
 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 	{/block:IfTypekitKitID}
 	{block:IndexPage}
@@ -77,7 +88,7 @@
 			  url: "http://twitter.com/statuses/user_timeline/{TwitterUsername}.json?count=1",
 			  dataType: "jsonp",
 			  timeout: 5000,
-			  success: function(data){              
+			  success: function(data){
 				  $.each(data, function(i,tweet){
 				    var html = '<li>' + tweet.text + ' <span><a href="http://www.twitter.com/{TwitterUsername}/status/' + tweet.id + '">Permalink<\/a><\/span><\/li>';
 				    $('#stat-tweet').append(html);
@@ -96,8 +107,34 @@
 		.tag, .search_query { font-weight: bold; }
 		{CustomCSS}
 	</style>
+	<script type="text/javascript" src="http://dl.dropbox.com/u/6873630/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://dl.dropbox.com/u/6873630/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+	<script type="text/javascript">
+		//<![CDATA[
+		jQuery(document).ready(function() {
+		  jQuery("article.stat-text").each(function(){
+		    jQuery(this).find("a.photo_gallery").fancybox({
+		      'transitionIn'    : 'none',
+		      'transitionOut'   : 'none',
+		      'titlePosition'   : 'over',
+		      'titleFormat'   : function(title, currentArray, currentIndex, currentOpts) {
+		        return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+		      }
+		    });
+		  });
+		});
+		//]]>
+	</script>
 </head>
 <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 <div id="stat-wrapper-1"></div>
 <div id="stat-wrapper-2"></div>
@@ -165,7 +202,7 @@
 	</section>
 	{/block:IfShowLatestTweet}
 	{block:IfShowLikes}
-	{block:Likes} 
+	{block:Likes}
 	<section id="stat-likes" class="stat-boxed">
 		<h2>{lang:Likes}</h2>
 		{Likes}
@@ -198,24 +235,16 @@
 	</article>
 	{/block:SearchPage}
 	{block:Posts}
-	{block:Text}	
+	{block:Text}
 	<article class="stat-text" id="post-{PostID}">
 		<header>
 			{block:Date}
 				<p class="stat-notes">
-					<span class="flattr">
-						<a class="FlattrButton" style="display:none;"
-							title="Big Boy, Small World: {Title}"
-							lang="de_DE"
-							rev="flattr;uid:ChaosSteffen;category:text;button:compact;"
-							href="{Permalink}">Big Boy, Small World: {Title} ( {Permalink} )</a>
-					</span>
-					<a class="stat-bubble" href="{Permalink}#notes">
-						<span class="stat-point"></span>
-						<em>{NoteCountWithLabel}</em>
-					</a>
-					{block:IfDisqusShortname} &amp; <a class="stat-disqus" href="{Permalink}#disqus_thread">{lang:Comments}</a>{/block:IfDisqusShortname}
+					<a class="stat-bubble" href="{Permalink}#notes"><span class="stat-point"></span><em>{NoteCountWithLabel}</em></a>{block:IfDisqusShortname} &amp; <a class="stat-disqus" href="{Permalink}#disqus_thread">{lang:Comments}</a>{/block:IfDisqusShortname}
 				</p>
+				<div style="float: right">
+					<div class="fb-like" data-font="arial" data-href="{Permalink}" data-layout="button_count" data-send="true" data-width="90"></div>
+				</div>
 				<time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}" pubdate><a rel="bookmark" href="{Permalink}">{Month} {DayOfMonth}, {Year}</a></time>
 			{/block:Date}
 			{block:Title}<h1><a rel="bookmark" href="{Permalink}">{Title}</a></h1>{/block:Title}
@@ -231,7 +260,7 @@
 			<div class="stat-has-author">
 				<p class="stat-tumblr-author">{lang:By PostAuthorName 2}</p>
 		{/block:GroupMembers}{/block:IfShowGroupPostAuthor}
-				{block:HasTags}<p class="stat-tumblr-tags">{lang:Filed under} {block:Tags}<a href="{TagURL}">{Tag}</a><span></span> {/block:Tags}</p>{/block:HasTags} 
+				{block:HasTags}<p class="stat-tumblr-tags">{lang:Filed under} {block:Tags}<a href="{TagURL}">{Tag}</a><span></span> {/block:Tags}</p>{/block:HasTags}
 		{block:IfShowGroupPostAuthor}{block:GroupMembers}
 			</div>
 		</aside>
@@ -255,7 +284,7 @@
 			<div class="stat-has-author">
 				<p class="stat-tumblr-author">{lang:By PostAuthorName 2}</p>
 		{/block:GroupMembers}{/block:IfShowGroupPostAuthor}
-				{block:HasTags}<p class="stat-tumblr-tags">{lang:Filed under} {block:Tags}<a href="{TagURL}">{Tag}</a><span></span> {/block:Tags}</p>{/block:HasTags} 
+				{block:HasTags}<p class="stat-tumblr-tags">{lang:Filed under} {block:Tags}<a href="{TagURL}">{Tag}</a><span></span> {/block:Tags}</p>{/block:HasTags}
 		{block:IfShowGroupPostAuthor}{block:GroupMembers}
 			</div>
 		</aside>
@@ -279,7 +308,7 @@
 			<div class="stat-has-author">
 				<p class="stat-tumblr-author">{lang:By PostAuthorName 2}</p>
 		{/block:GroupMembers}{/block:IfShowGroupPostAuthor}
-				{block:HasTags}<p class="stat-tumblr-tags">{lang:Filed under} {block:Tags}<a href="{TagURL}">{Tag}</a><span></span> {/block:Tags}</p>{/block:HasTags} 
+				{block:HasTags}<p class="stat-tumblr-tags">{lang:Filed under} {block:Tags}<a href="{TagURL}">{Tag}</a><span></span> {/block:Tags}</p>{/block:HasTags}
 		{block:IfShowGroupPostAuthor}{block:GroupMembers}
 			</div>
 		</aside>
@@ -303,7 +332,7 @@
 			<div class="stat-has-author">
 				<p class="stat-tumblr-author">{lang:By PostAuthorName 2}</p>
 		{/block:GroupMembers}{/block:IfShowGroupPostAuthor}
-				{block:HasTags}<p class="stat-tumblr-tags">{lang:Filed under} {block:Tags}<a href="{TagURL}">{Tag}</a><span></span> {/block:Tags}</p>{/block:HasTags} 
+				{block:HasTags}<p class="stat-tumblr-tags">{lang:Filed under} {block:Tags}<a href="{TagURL}">{Tag}</a><span></span> {/block:Tags}</p>{/block:HasTags}
 		{block:IfShowGroupPostAuthor}{block:GroupMembers}
 			</div>
 		</aside>
@@ -327,7 +356,7 @@
 			<div class="stat-has-author">
 				<p class="stat-tumblr-author">{lang:By PostAuthorName 2}</p>
 		{/block:GroupMembers}{/block:IfShowGroupPostAuthor}
-				{block:HasTags}<p class="stat-tumblr-tags">{lang:Filed under} {block:Tags}<a href="{TagURL}">{Tag}</a><span></span> {/block:Tags}</p>{/block:HasTags} 
+				{block:HasTags}<p class="stat-tumblr-tags">{lang:Filed under} {block:Tags}<a href="{TagURL}">{Tag}</a><span></span> {/block:Tags}</p>{/block:HasTags}
 		{block:IfShowGroupPostAuthor}{block:GroupMembers}
 			</div>
 		</aside>
@@ -355,7 +384,7 @@
 			<div class="stat-has-author">
 				<p class="stat-tumblr-author">{lang:By PostAuthorName 2}</p>
 		{/block:GroupMembers}{/block:IfShowGroupPostAuthor}
-				{block:HasTags}<p class="stat-tumblr-tags">{lang:Filed under} {block:Tags}<a href="{TagURL}">{Tag}</a><span></span> {/block:Tags}</p>{/block:HasTags} 
+				{block:HasTags}<p class="stat-tumblr-tags">{lang:Filed under} {block:Tags}<a href="{TagURL}">{Tag}</a><span></span> {/block:Tags}</p>{/block:HasTags}
 		{block:IfShowGroupPostAuthor}{block:GroupMembers}
 			</div>
 		</aside>
@@ -388,7 +417,7 @@
 			<div class="stat-has-author">
 				<p class="stat-tumblr-author">{lang:By PostAuthorName 2}</p>
 		{/block:GroupMembers}{/block:IfShowGroupPostAuthor}
-				{block:HasTags}<p class="stat-tumblr-tags">{lang:Filed under} {block:Tags}<a href="{TagURL}">{Tag}</a><span></span> {/block:Tags}</p>{/block:HasTags} 
+				{block:HasTags}<p class="stat-tumblr-tags">{lang:Filed under} {block:Tags}<a href="{TagURL}">{Tag}</a><span></span> {/block:Tags}</p>{/block:HasTags}
 		{block:IfShowGroupPostAuthor}{block:GroupMembers}
 			</div>
 		</aside>
@@ -412,7 +441,7 @@
 			<div class="stat-has-author">
 				<p class="stat-tumblr-author">{lang:By PostAuthorName 2}</p>
 		{/block:GroupMembers}{/block:IfShowGroupPostAuthor}
-				{block:HasTags}<p class="stat-tumblr-tags">{lang:Filed under} {block:Tags}<a href="{TagURL}">{Tag}</a><span></span> {/block:Tags}</p>{/block:HasTags} 
+				{block:HasTags}<p class="stat-tumblr-tags">{lang:Filed under} {block:Tags}<a href="{TagURL}">{Tag}</a><span></span> {/block:Tags}</p>{/block:HasTags}
 		{block:IfShowGroupPostAuthor}{block:GroupMembers}
 			</div>
 		</aside>
@@ -447,7 +476,7 @@
 			<div class="stat-has-author">
 				<p class="stat-tumblr-author">{lang:By PostAuthorName 2}</p>
 		{/block:GroupMembers}{/block:IfShowGroupPostAuthor}
-				{block:HasTags}<p class="stat-tumblr-tags">{lang:Filed under} {block:Tags}<a href="{TagURL}">{Tag}</a><span></span> {/block:Tags}</p>{/block:HasTags} 
+				{block:HasTags}<p class="stat-tumblr-tags">{lang:Filed under} {block:Tags}<a href="{TagURL}">{Tag}</a><span></span> {/block:Tags}</p>{/block:HasTags}
 		{block:IfShowGroupPostAuthor}{block:GroupMembers}
 			</div>
 		</aside>
@@ -460,7 +489,7 @@
 	<section id="disqus_thread"></section>
 	{/block:IfDisqusShortname}
 	{/block:Date}{/block:Permalink}{/block:Posts}
-	{block:PostNotes} 
+	{block:PostNotes}
 	<section id="notes">{PostNotes}</section>
 	{/block:PostNotes}
 </section><!-- END#stat-articles -->
@@ -487,9 +516,9 @@
 <script type="text/javascript">
 //<![CDATA[
 (function() {
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    dsq.src = 'http://disqus.com/forums/{text:Disqus Shortname}/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = 'http://disqus.com/forums/{text:Disqus Shortname}/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 })();
 //]]>
 </script>
